@@ -22,6 +22,7 @@ pub use self::{
     },
     generate_template::GenerateTemplate,
     maintenance::{Maintenance, MaintenanceAction},
+    optimize_config::{OptimizeConfig},
     run::{NodeRunConfig, Run},
     run_dev::RunDev,
 };
@@ -30,6 +31,7 @@ mod finalize;
 mod generate_config;
 mod generate_template;
 mod maintenance;
+mod optimize_config;
 mod run;
 mod run_dev;
 
@@ -62,6 +64,10 @@ pub enum Command {
     #[structopt(name = "finalize")]
     Finalize(Finalize),
 
+    /// Optimize the node configuration.
+    #[structopt(name = "optimize-config")]
+    OptimizeConfig(OptimizeConfig),
+
     /// Run the node with provided node config.
     #[structopt(name = "run")]
     Run(Run),
@@ -88,6 +94,7 @@ impl ExonumCommand for Command {
             Self::GenerateTemplate(command) => command.execute(),
             Self::GenerateConfig(command) => command.execute(),
             Self::Finalize(command) => command.execute(),
+            Self::OptimizeConfig(command) => command.execute(),
             Self::Run(command) => command.execute(),
             Self::RunDev(command) => command.execute(),
             Self::Maintenance(command) => command.execute(),
@@ -118,6 +125,12 @@ pub enum StandardResult {
     /// `finalize` command output.
     Finalize {
         /// Path to a generated final node config.
+        node_config_path: PathBuf,
+    },
+
+    /// `optimize-config` command output.
+    OptimizeConfig {
+        /// Path to optimized node configuration.
         node_config_path: PathBuf,
     },
 

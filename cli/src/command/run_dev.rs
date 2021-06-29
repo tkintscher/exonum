@@ -25,6 +25,7 @@ use crate::command::{
     finalize::Finalize,
     generate_config::{GenerateConfig, PRIVATE_CONFIG_FILE_NAME, PUBLIC_CONFIG_FILE_NAME},
     generate_template::GenerateTemplate,
+    optimize_config::OptimizeConfig,
     run::Run,
     ExonumCommand, StandardResult,
 };
@@ -109,6 +110,17 @@ impl ExonumCommand for RunDev {
                 private_allow_origin: Some("*".to_owned()),
             };
             finalize.execute()?;
+
+            let optimize = OptimizeConfig {
+                node_config_file: node_config_path.clone(),
+                // by default, modify the node_config_file in-place
+                output_file: None,
+                // use default
+                max_open_files: None,
+                // use default
+                max_total_wal_size: None
+            };
+            optimize.execute()?;
         }
 
         let run = Run {
