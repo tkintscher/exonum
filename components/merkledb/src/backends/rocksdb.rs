@@ -25,6 +25,7 @@ use std::{fmt, iter::Peekable, mem, path::Path, sync::Arc};
 
 use crate::{
     db::{check_database, Change},
+    options::LogVerbosity,
     Database, DbOptions, Iter, Iterator, Patch, ResolvedAddress, Snapshot,
 };
 
@@ -56,6 +57,10 @@ impl From<&DbOptions> for RocksDbOptions {
         defaults.set_compression_type(opts.compression_type.into());
         defaults.set_max_open_files(opts.max_open_files.unwrap_or(-1));
         defaults.set_max_total_wal_size(opts.max_total_wal_size.unwrap_or(0));
+        defaults.set_log_level(opts.log_verbosity.unwrap_or(LogVerbosity::Info).into());
+        defaults.set_max_log_file_size(opts.max_log_file_size.unwrap_or(0));
+        defaults.set_keep_log_file_num(opts.keep_log_file_num.unwrap_or(1000));
+        defaults.set_recycle_log_file_num(opts.recycle_log_file_num.unwrap_or(0));
         defaults
     }
 }

@@ -182,7 +182,7 @@ pub use self::{
     hash::{root_hash, HashTag, ObjectHash, ValidationError},
     keys::BinaryKey,
     lazy::Lazy,
-    options::DbOptions,
+    options::{CompressionType, DbOptions, LogVerbosity},
     values::BinaryValue,
     views::{AsReadonly, IndexAddress, IndexType, ResolvedAddress, SystemSchema},
 };
