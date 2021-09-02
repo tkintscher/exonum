@@ -118,7 +118,11 @@ impl ExonumCommand for RunDev {
                 // use default
                 max_open_files: None,
                 // use default
-                max_total_wal_size: None
+                max_total_wal_size: None,
+                log_level: None,
+                max_log_file_size: None,
+                keep_log_file_num: None,
+                recycle_log_files: None,
             };
             optimize.execute()?;
         }

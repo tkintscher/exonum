@@ -22,7 +22,7 @@ pub use self::{
     },
     generate_template::GenerateTemplate,
     maintenance::{Maintenance, MaintenanceAction},
-    optimize_config::{OptimizeConfig},
+    optimize_config::OptimizeConfig,
     run::{NodeRunConfig, Run},
     run_dev::RunDev,
 };
